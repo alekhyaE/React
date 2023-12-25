@@ -1,0 +1,33 @@
+{
+  "name": "react-learning",
+  "version": "1.0.0",
+  "description": "react-description",
+
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alekhyaE/React.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Alekhya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alekhyaE/React/issues"
+  },
+  "homepage": "https://github.com/alekhyaE/React#readme",
+  "devDependencies": {
+    "parcel": "^2.10.3",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "browserslist":[
+    "last 2 versions"
+  ]
+}
