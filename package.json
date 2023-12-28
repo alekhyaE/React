@@ -2,7 +2,6 @@
   "name": "react-learning",
   "version": "1.0.0",
   "description": "react-description",
-
   "scripts": {
     "test": "jest",
     "start": "parcel index.html",
@@ -27,9 +26,10 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1"
   },
-  "browserslist":[
+  "browserslist": [
     "last 2 versions"
   ]
 }

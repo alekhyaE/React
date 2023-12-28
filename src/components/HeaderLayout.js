@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { LOGO_URL } from '../utils/constants';
 
 //header
@@ -12,9 +13,15 @@ export const HeaderLayout = () =>{
             </div>
             <div className="nav-items">
                 <ul>
-                    <li>Home</li>
-                    <li>About Us-It is</li>
-                    <li>Contact</li>
+                    <li><Link to='/'>Home
+                        </Link></li>
+                    <li>
+                        <Link to='/about'>About Us
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/contact">Contact US</Link>
+                    </li>
                     <li>Cart</li>
                     <button className='login' onClick={()=>{
                        AuthBtn=='login'? setAuthBtn('logout'):setAuthBtn('login');
