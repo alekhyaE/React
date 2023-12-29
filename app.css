@@ -67,3 +67,12 @@
 .filter{
     display: flex;
 }
+.user-card{
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid black;
+}
+.avatar-user{
+    width:100px;
+    height: 100px;
+}

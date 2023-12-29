@@ -27,12 +27,12 @@ const Body = () =>{
 
         const jsonData= await data.json();
 
-        console.log(jsonData);
+        
         //Optional chaining
         setListOfRestaurants(jsonData?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards[1]?.card?.card?.restaurants);
         setFilteredRestaurants(jsonData?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards[1]?.card?.card?.restaurants);
     }
-    console.log("Body rendered");
+    
     if(listOfRestaurants.length==0){
         return <Shimmer/>
     }
@@ -43,9 +43,9 @@ const Body = () =>{
         <div className="search">
                 <input type="text" className="search-box" value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}/>
                 <button onClick= {()=>{
-                    console.log(searchText);
+                    // console.log(searchText);
                     const filteredRestaurants= listOfRestaurants.filter((res)=>res.info.name.toLowerCase().includes(searchText.toLowerCase()));
-                    console.log(filteredRestaurants)
+                    // console.log(filteredRestaurants)
                     setFilteredRestaurants(filteredRestaurants);
 
                 }}>Search</button>
@@ -53,7 +53,7 @@ const Body = () =>{
             <button className="filter-button" 
             onClick= {() =>{
                 
-                console.log('Button clicked');
+                // console.log('Button clicked');
                 const filteredList = listOfRestaurants.filter((res)=>{
                     return res.info.avgRating>4
                 })

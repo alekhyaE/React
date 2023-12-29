@@ -6,16 +6,23 @@ export const RestaurantMenu = () =>{
 
     useEffect(()=>{
         fetchMenu();
+        console.log("useEffect");
+
+        //Component Unmounting
+        return () =>{
+            console.log("unmounting here")
+        }
     },[]);
 
+    console.log("rendering outside")
     const [resInfo, setResInfo] = useState(null);
   
     const {resId} = useParams();
-    console.log(resId)
+    // console.log(resId)
     const fetchMenu = async()=>{
         const data= await fetch(MENU_URL+resId)
         const jsonData= await data.json();
-        console.log(jsonData);
+        // console.log(jsonData);
         setResInfo(jsonData.data);
         
     }
@@ -24,7 +31,7 @@ export const RestaurantMenu = () =>{
     }
     const {name,cuisines,costForTwoMessage} = resInfo?.cards[0]?.card?.card?.info;
     const {itemCards} = resInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card;
-    console.log(itemCards);
+    // console.log(itemCards);
     return  (
         <div className="menu">
             <h1>{name}</h1>
