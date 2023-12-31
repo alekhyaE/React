@@ -1,31 +1,34 @@
-import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import { MENU_URL } from '../utils/constants';
+import useRestaurantMenu from '../utils/useRestaurantMenu';
 import Shimmer from './Shimmer';
 export const RestaurantMenu = () =>{
 
-    useEffect(()=>{
-        fetchMenu();
-        console.log("useEffect");
+    // useEffect(()=>{
+    //     fetchMenu();
+    //     console.log("useEffect");
 
-        //Component Unmounting
-        return () =>{
-            console.log("unmounting here")
-        }
-    },[]);
+    //     //Component Unmounting
+    //     return () =>{
+    //         console.log("unmounting here")
+    //     }
+    // },[]);
 
     console.log("rendering outside")
-    const [resInfo, setResInfo] = useState(null);
+    // const [resInfo, setResInfo] = useState(null);
   
     const {resId} = useParams();
+
+    //Custom hooks
+    const resInfo = useRestaurantMenu(resId)
+    console.log(resInfo)
     // console.log(resId)
-    const fetchMenu = async()=>{
-        const data= await fetch(MENU_URL+resId)
-        const jsonData= await data.json();
-        // console.log(jsonData);
-        setResInfo(jsonData.data);
+    // const fetchMenu = async()=>{
+    //     const data= await fetch(MENU_URL+resId)
+    //     const jsonData= await data.json();
+    //     // console.log(jsonData);
+    //     setResInfo(jsonData.data);
         
-    }
+    // }
     if(resInfo==null) {
         return <Shimmer/>
     }

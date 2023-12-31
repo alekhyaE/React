@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import useOnlineStatus from '../utils/useOnlineStatus';
 import RestaurantCard from './RestaurantCard';
 import Shimmer from './Shimmer';
+
 const Body = () =>{
 
     //Creating state var
@@ -32,10 +34,16 @@ const Body = () =>{
         setListOfRestaurants(jsonData?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards[1]?.card?.card?.restaurants);
         setFilteredRestaurants(jsonData?.data?.cards[1]?.groupedCard?.cardGroupMap?.RESTAURANT?.cards[1]?.card?.card?.restaurants);
     }
-    
+    const online= useOnlineStatus();
+   console.log(online)
+    if(online==false){
+        return (<h1>Looks like you are offline</h1>)
+       }
     if(listOfRestaurants.length==0){
         return <Shimmer/>
     }
+    
+   
     return listOfRestaurants.length==0? (<Shimmer/>): (
     <div className='body'>
         
@@ -74,5 +82,6 @@ const Body = () =>{
          </div>
     </div>
     )
+   
  }
 export default Body;
