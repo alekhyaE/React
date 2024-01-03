@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import UserContext from '../utils/UserContext';
 import useOnlineStatus from '../utils/useOnlineStatus';
-import RestaurantCard from './RestaurantCard';
+import RestaurantCard, { withPromotedLabel } from './RestaurantCard';
 import Shimmer from './Shimmer';
-
 const Body = () =>{
-
+    const {loggedInUser, setUserName} = useContext(UserContext);
     //Creating state var
     const [listOfRestaurants, setListOfRestaurants] = useState(
      []
@@ -17,6 +17,8 @@ const Body = () =>{
 
     const [searchText, setSearchText] = useState("");
 
+    const RestaurantCardPromoted = withPromotedLabel(RestaurantCard)
+
     useEffect(()=>{
         //Initially, we show dummy data
         //Once the comp is rendered, we make API call
@@ -25,8 +27,9 @@ const Body = () =>{
     },[]);
 
     const fetchData= async()=>{
+        //https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
+        //intial link- 
         const data= await fetch("https://www.swiggy.com/dapi/restaurants/search/v3?lat=12.9351929&lng=77.62448069999999&str=Biryan&trackingId=65c82a60-19f9-c69e-3a61-1edf4992307f&submitAction=ENTER&queryUniqueId=c97f1c63-8083-956d-342c-f957a081af25");
-
         const jsonData= await data.json();
 
         
@@ -36,6 +39,7 @@ const Body = () =>{
     }
     const online= useOnlineStatus();
    console.log(online)
+
     if(online==false){
         return (<h1>Looks like you are offline</h1>)
        }
@@ -74,11 +78,16 @@ const Body = () =>{
             </button>
             </div>
             </div>
-        
+            <div className="search p-4 m-4 flex items-center">
+                <input className='border border-black p-2' value={loggedInUser} onChange={(e)=>setUserName(e.target.value)}/>
+                </div>
          <div className="res-container flex flex-wrap">
             {
               filteredRestaurants.map((restaurant)=>(
-               <Link key={restaurant.info.id} to={"restaurant/"+ restaurant.info.id}>  <RestaurantCard key={restaurant.info.id} resData={restaurant} /></Link>
+               <Link key={restaurant.info.id} to={"restaurant/"+ restaurant.info.id}>  
+                {restaurant.info.avgRating>4?
+                (<RestaurantCardPromoted key={restaurant.info.id} resData={restaurant}/>): (<RestaurantCard key={restaurant.info.id} resData={restaurant}/>)}
+                </Link>
               ))
             }
          </div>
